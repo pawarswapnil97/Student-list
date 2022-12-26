@@ -1,0 +1,11 @@
+.body
+{
+    height: 92vh;
+    width: 100%;
+    padding: 10px !important;
+    /* background: linear-gradient(rgba(0, 0, 0, 0.601), rgba(0, 0, 0, 0.607)), url(../../assets/carrental.png); */
+    background: linear-gradient(rgba(0, 0, 0, 0.656), rgba(0, 0, 0, 0.727)), url(https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&w=600);
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}

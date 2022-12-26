@@ -1,0 +1,101 @@
+<section bg-light>
+  <div class="container-fluid ">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h3 class="text-center p-2">Student's List</h3><br>
+          <div class="row" [hidden]="!deleteMessage">
+               
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                            <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <strong>Student Data Deleted</strong>
+                            </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+            </div>           
+        </div>
+    
+      
+      <div class="panel-body">
+          <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+          [dtTrigger]="dtTrigger"  >
+              <thead class="thead-light">
+                  <tr>
+                      <th>Student Name</th>
+                      <th>Student Email</th>
+                      <th>Student Branch</th>
+                      <th>Action</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                   <tr *ngFor="let student of students ">
+                      <td>{{student.student_name}}</td>
+                      <td>{{student.student_email}}</td>
+                      <td>{{student.student_branch}}</td>
+                      <td><button (click)="deleteStudent(student.student_id)" class='btn btn-danger btn-sm'><i class="fa fa-futboll-0">Delete</i></button>&nbsp;
+                        <button (click)="updateStudent(student.student_id)" class='btn btn-success btn-sm' data-toggle="modal" data-target="#myModal">Update</button>
+                      </td>
+                    </tr> 
+              </tbody><br>
+          </table>
+      </div>
+    </div> 
+    
+    <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                    <form [formGroup]="studentupdateform" #updstu (ngSubmit)="updateStu(updstu)">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title" style="text-align: center">Update Student</h4>
+                  
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body" *ngFor="let student of studentlist " >
+                    <div [hidden]="isupdated">
+    
+                        <input type="hidden" class="form-control"  formControlName="student_id" [(ngModel)]="student.student_id">
+                                <div class="form-group">
+                                    <label for="name">Student Name</label>
+                                    <input type="text" class="form-control"  formControlName="student_name" [(ngModel)]="student.student_name"  >
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="name">Student Email</label>
+                                    <input type="text" class="form-control" formControlName="student_email" [(ngModel)]="student.student_email">
+                                </div>
+                        
+                                <div class="form-group">
+                                    <label for="name">Student Branch</label>
+                                      <select class="form-control" formControlName="student_branch" required>                                   
+                                        <option value="BE"  [selected]="'BE'  == student.student_branch" >Bachlor OF Engg</option>
+                                        <option value="BEE" [selected]="'BEE' == student.student_branch" >Bachlor OF Ele</option>
+                                        <option value="BCA" [selected]="'BCA' == student.student_branch" >Bachlor OF Computer Application</option>
+                                        <option value="BCS" [selected]="'BCS' == student.student_branch" >Bachlor OF Computer Science</option>
+                                        <option value="MCA" [selected]="'MCA' == student.student_branch" >Master OF Computer Application</option>
+                                        <option value="MCS" [selected]="'MCS' == student.student_branch" >Master OF Computer Science</option>
+                                        
+                                      </select>                               
+                                </div>                   
+                      </div>  
+                      <div [hidden]="!isupdated">
+                          <h5 class="text-success">Student detail updated Successfully !</h5>
+                      </div>        
+                        
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer" >
+                  <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+                </div>
+                
+            </form>
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
